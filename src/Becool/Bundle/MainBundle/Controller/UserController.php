@@ -52,7 +52,16 @@ class UserController extends Controller
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         
+        // Encodage du mot de passe en sha1
         $entity->setPassword(sha1($entity->getPassword()));
+        
+        // Définition de l'Username par défaut (adresse email)
+        $entity->setUsername($entity->getEmail());
+        
+        // Définition par défaut du niveau du personnage ainsi que des points totaux et temporaires
+        $entity->setLevel(1);
+        $entity->setTotalPoint(0);
+        $entity->setTempPoint(0);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>User</h1>
+    <h1>Détails de l'utilisateur {{ entity.prenom ~ entity.nom }}</h1>
 
     <table class="record_properties">
         <tbody>
@@ -10,24 +10,44 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Username</th>
-                <td>{{ entity.username }}</td>
+                <th>Nom</th>
+                <td>{{ entity.nom }}</td>
             </tr>
             <tr>
-                <th>Salt</th>
-                <td>{{ entity.salt }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ entity.password }}</td>
+                <th>Prenom</th>
+                <td>{{ entity.prenom }}</td>
             </tr>
             <tr>
                 <th>Email</th>
                 <td>{{ entity.email }}</td>
             </tr>
             <tr>
-                <th>Isactive</th>
-                <td>{{ entity.isActive }}</td>
+                <th>Mot de passe</th>
+                <td>{{ entity.password }}</td>
+            </tr>
+            <tr>
+                <th>Date de naissance</th>
+                <td>{{ entity.birth|date('d-m-Y') }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ entity.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ entity.ville }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ entity.level }}</td>
+            </tr>
+            <tr>
+                <th>Points totaux</th>
+                <td>{{ entity.totalPoint }}</td>
+            </tr>
+            <tr>
+                <th>Point temporaires</th>
+                <td>{{ entity.tempPoint }}</td>
             </tr>
         </tbody>
     </table>
@@ -35,12 +55,12 @@
         <ul class="record_actions">
     <li>
         <a href="{{ path('admin_user') }}">
-            Back to the list
+            Retourner à la liste
         </a>
     </li>
     <li>
         <a href="{{ path('admin_user_edit', { 'id': entity.id }) }}">
-            Edit
+            Modifier
         </a>
     </li>
     <li>{{ form(delete_form) }}</li>
