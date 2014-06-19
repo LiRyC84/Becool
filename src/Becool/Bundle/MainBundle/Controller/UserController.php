@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Becool\Bundle\MainBundle\Entity\User;
 use Becool\Bundle\MainBundle\Form\UserType;
 
+use JMS\SecurityExtraBundle\Annotation\Secure;
+
 /**
  * User controller.
  *
@@ -20,6 +22,7 @@ class UserController extends Controller
 
     /**
      * Lists all User entities.
+     * @Secure(roles="ROLE_ADMIN")
      *
      * @Route("/", name="admin_user")
      * @Method("GET")
@@ -37,6 +40,7 @@ class UserController extends Controller
     }
     /**
      * Creates a new User entity.
+     * @Secure(roles="ROLE_ADMIN")
      *
      * @Route("/", name="admin_user_create")
      * @Method("POST")
@@ -103,6 +107,7 @@ class UserController extends Controller
 
     /**
      * Finds and displays a User entity.
+     * @Secure(roles="ROLE_ADMIN")
      *
      * @Route("/{id}", name="admin_user_show")
      * @Method("GET")
@@ -173,6 +178,7 @@ class UserController extends Controller
     }
     /**
      * Edits an existing User entity.
+     * @Secure(roles="ROLE_ADMIN")
      *
      * @Route("/{id}", name="admin_user_update")
      * @Method("PUT")
@@ -206,6 +212,7 @@ class UserController extends Controller
     }
     /**
      * Deletes a User entity.
+     * @Secure(roles="ROLE_ADMIN")
      *
      * @Route("/{id}", name="admin_user_delete")
      * @Method("DELETE")

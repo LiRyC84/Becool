@@ -229,14 +229,17 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
         }
 
-        // login_check
-        if ($pathinfo === '/admin/login_check') {
-            return array('_route' => 'login_check');
-        }
+        if (0 === strpos($pathinfo, '/admin/log')) {
+            // login_check
+            if ($pathinfo === '/admin/login_check') {
+                return array('_route' => 'login_check');
+            }
 
-        // logout
-        if ($pathinfo === '/logout') {
-            return array('_route' => 'logout');
+            // logout
+            if ($pathinfo === '/admin/logout') {
+                return array('_route' => 'logout');
+            }
+
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

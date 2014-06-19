@@ -39,7 +39,7 @@ security:
                 default_target_path: /admin/user
             logout:
                 path: logout
-                target: /
+                target: /login
 
     access_control:
         - { path: ^/login/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

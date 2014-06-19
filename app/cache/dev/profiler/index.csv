@@ -96,3 +96,15 @@ e0db76,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/user,1403186287,
 71727f,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/user/,1403186288,
 5a4f70,127.0.0.1,GET,http://becool.tld/app_dev.php/,1403186362,915f81
 915f81,127.0.0.1,GET,http://becool.tld/app_dev.php/,1403186362,
+892dfb,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/user/,1403187647,
+f89bc5,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/user/,1403187866,
+ce098e,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/user/,1403187920,
+583a31,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/logout,1403187950,8e2c67
+8e2c67,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/logout,1403187950,
+de5ddc,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/logout,1403187974,
+a0df97,127.0.0.1,GET,http://becool.tld/app_dev.php/,1403187975,c3c149
+c3c149,127.0.0.1,GET,http://becool.tld/app_dev.php/,1403187975,
+0f3e02,127.0.0.1,GET,http://becool.tld/app_dev.php/login,1403187996,
+d6171e,127.0.0.1,POST,http://becool.tld/app_dev.php/admin/login_check,1403188003,
+c25eb3,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/user,1403188003,
+6d50b0,127.0.0.1,GET,http://becool.tld/app_dev.php/admin/user/,1403188003,
