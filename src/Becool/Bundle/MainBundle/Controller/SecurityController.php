@@ -1,6 +1,8 @@
 <?php
 
 namespace Becool\Bundle\MainBundle\Controller;
+
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -23,26 +25,19 @@ class SecurityController extends Controller
    */ 
   public function loginAction()
   {
-    // Si le visiteur est déjà identifié, on le redirige vers l'accueil
-    if ($this->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-      return $this->redirect($this->generateUrl('admin/user'));
-    }
-    $request = $this->getRequest();
-    $session = $request->getSession();
-    
-    // On vérifie s'il y a des erreurs d'une précédente soumission du formulaire
-    if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-      $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-    } else {
-      $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-      $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-    }
-    
-    return $this->render('BecoolMainBundle:Security:login.html.twig', array(
-      // Valeur du précédent nom d'utilisateur entré par l'internaute
-      'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-      'error'         => $error,
-    ));
+    // ON récupère les erreurs d'authentification si le formulaire a été passé avec de mauvaises informations
+        if ($this->get('request')->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
+            $error = $this->get('request')->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
+        } else {
+            $error = $this->get('request')->getSession()->get(SecurityContext::AUTHENTICATION_ERROR);
+        }
+  
+        return $this->render('BecoolMainBundle:Security:login.html.twig', array(
+            // On envoie à notre vue le login qu'a saisi l'utilisateur précédemment
+            'last_username' => $this->get('request')->getSession()->get(SecurityContext::LAST_USERNAME),
+            // Et les erreurs qu'il y a eut lors de la validation du formulaire
+            'error'         => $error,
+        ));
   }
   
 } 

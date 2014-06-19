@@ -3,7 +3,7 @@
 namespace Becool\Bundle\MainBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Becool\Bundle\MainBundle\Entity\UserRepository")
  */
-class User implements AdvancedUserInterface, \Serializable
+class User implements UserInterface, \Serializable
 {
      /**
      * @ORM\Column(type="integer")
@@ -98,7 +98,7 @@ class User implements AdvancedUserInterface, \Serializable
      */
     public function getRoles()
     {
-        return array('ROLE_ADMIN');
+        return $this->roles;
     }
 
     /**
@@ -126,31 +126,6 @@ class User implements AdvancedUserInterface, \Serializable
         list (
             $this->id,
         ) = unserialize($serialized);
-    }
-    
-    public function isEqualTo(UserInterface $user)
-    {
-	return $this->username === $user->getUsername();
-    }
-    
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    public function isAccountNonLocked()
-    {
-        return true;
-    }
-
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    public function isEnabled()
-    {
-        return $this->isActive;
     }
 
     /**

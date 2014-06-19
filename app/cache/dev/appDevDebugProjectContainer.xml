@@ -576,8 +576,8 @@
     <parameter key="jms_di_extra.disable_grep">false</parameter>
     <parameter key="jms_di_extra.doctrine_integration">true</parameter>
     <parameter key="jms_di_extra.cache_warmer.controller_file_blacklist" type="collection"/>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">/var/www/html/Becool/app/cache/dev/jms_diextra/doctrine/EntityManager_53a1a482ea6f8.php</parameter>
-    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53a1a482ea6f8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.file">/var/www/html/Becool/app/cache/dev/jms_diextra/doctrine/EntityManager_53a2ec6eb1606.php</parameter>
+    <parameter key="jms_di_extra.doctrine_integration.entity_manager.class">EntityManager53a2ec6eb1606_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager</parameter>
     <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
     <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
     <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
@@ -1726,12 +1726,12 @@
       <argument type="collection">
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\AnonymousAuthenticationProvider" public="false">
-            <argument>53a1a482abd09</argument>
+            <argument>53a2ec6e823f2</argument>
           </service>
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Core\Authentication\Provider\DaoAuthenticationProvider" public="false">
-            <argument type="service" id="security.user.provider.concrete.in_memory"/>
+            <argument type="service" id="security.user.provider.concrete.users"/>
             <argument type="service">
               <service class="Symfony\Component\Security\Core\User\UserChecker" public="false"/>
             </argument>
@@ -1915,10 +1915,10 @@
         </argument>
       </call>
     </service>
-    <service id="security.user.provider.concrete.administrators" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
+    <service id="security.user.provider.concrete.users" class="Symfony\Bridge\Doctrine\Security\User\EntityUserProvider" public="false">
       <argument type="service" id="doctrine"/>
-      <argument>BecoolMainBundle:User</argument>
-      <argument>null</argument>
+      <argument>Becool\Bundle\MainBundle\Entity\User</argument>
+      <argument>username</argument>
       <argument>null</argument>
     </service>
     <service id="security.firewall.map.context.login_firewall" class="Symfony\Bundle\SecurityBundle\Security\FirewallContext">
@@ -1929,7 +1929,7 @@
             <argument type="service" id="security.context"/>
             <argument type="collection">
               <argument type="service" id="security.user.provider.concrete.in_memory"/>
-              <argument type="service" id="security.user.provider.concrete.administrators"/>
+              <argument type="service" id="security.user.provider.concrete.users"/>
             </argument>
             <argument>login_firewall</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -1939,7 +1939,7 @@
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\AnonymousAuthenticationListener" public="false">
             <argument type="service" id="security.context"/>
-            <argument>53a1a482abd09</argument>
+            <argument>53a2ec6e823f2</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
           </service>
         </argument>
@@ -1966,7 +1966,7 @@
             <argument type="service" id="security.context"/>
             <argument type="collection">
               <argument type="service" id="security.user.provider.concrete.in_memory"/>
-              <argument type="service" id="security.user.provider.concrete.administrators"/>
+              <argument type="service" id="security.user.provider.concrete.users"/>
             </argument>
             <argument>admin_area</argument>
             <argument type="service" id="monolog.logger.security" on-invalid="null"/>
@@ -1997,7 +1997,7 @@
         </argument>
         <argument type="service">
           <service class="Symfony\Component\Security\Http\Firewall\UsernamePasswordFormAuthenticationListener" public="false">
-            <tag name="security.remember_me_aware" id="admin_area" provider="security.user.provider.concrete.in_memory"/>
+            <tag name="security.remember_me_aware" id="admin_area" provider="security.user.provider.concrete.users"/>
             <argument type="service" id="security.context"/>
             <argument type="service" id="security.authentication.manager"/>
             <argument type="service">
@@ -2434,8 +2434,8 @@
       <argument type="collection"/>
       <argument type="collection"/>
     </service>
-    <service id="doctrine.orm.default_entity_manager" class="EntityManager53a1a482ea6f8_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
-      <file>/var/www/html/Becool/app/cache/dev/jms_diextra/doctrine/EntityManager_53a1a482ea6f8.php</file>
+    <service id="doctrine.orm.default_entity_manager" class="EntityManager53a2ec6eb1606_546a8d27f194334ee012bfe64f629947b07e4919\__CG__\Doctrine\ORM\EntityManager">
+      <file>/var/www/html/Becool/app/cache/dev/jms_diextra/doctrine/EntityManager_53a2ec6eb1606.php</file>
       <argument type="service">
         <service class="Doctrine\ORM\EntityManager" factory-method="create" public="false">
           <argument type="service" id="doctrine.dbal.default_connection"/>
@@ -2957,7 +2957,7 @@
     </service>
     <service id="security.encoder_factory" class="Symfony\Component\Security\Core\Encoder\EncoderFactory">
       <argument type="collection">
-        <argument key="Becool\MainBundle\Entity\User" type="collection">
+        <argument key="Becool\Bundle\MainBundle\Entity\User" type="collection">
           <argument key="class">%security.encoder.digest.class%</argument>
           <argument key="arguments" type="collection">
             <argument>sha1</argument>
