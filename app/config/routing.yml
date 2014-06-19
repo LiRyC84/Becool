@@ -1,0 +1,14 @@
+becool_main:
+    resource: "@BecoolMainBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+login:
+    pattern:    /login
+    defaults:    { _controller: BecoolMainBundle:Security:login }
+    
+login_check:
+    pattern:   /admin/login_check
+
+logout:
+    pattern:   /admin/logout
