@@ -135,92 +135,105 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // becool_main_default_index
-        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
-            return $this->mergeDefaults(array_replace($matches, array('_route' => 'becool_main_default_index')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\DefaultController::indexAction',));
-        }
-
-        if (0 === strpos($pathinfo, '/admin/user')) {
-            // admin_user
-            if (rtrim($pathinfo, '/') === '/admin/user') {
+        if (0 === strpos($pathinfo, '/profil')) {
+            // profil
+            if (rtrim($pathinfo, '/') === '/profil') {
                 if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                     $allow = array_merge($allow, array('GET', 'HEAD'));
-                    goto not_admin_user;
+                    goto not_profil;
                 }
 
                 if (substr($pathinfo, -1) !== '/') {
-                    return $this->redirect($pathinfo.'/', 'admin_user');
+                    return $this->redirect($pathinfo.'/', 'profil');
                 }
 
-                return array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::indexAction',  '_route' => 'admin_user',);
+                return array (  '_controller' => 'Becool\\Bundle\\ProfilBundle\\Controller\\ProfilController::indexAction',  '_route' => 'profil',);
             }
-            not_admin_user:
+            not_profil:
 
-            // admin_user_create
-            if ($pathinfo === '/admin/user/') {
-                if ($this->context->getMethod() != 'POST') {
-                    $allow[] = 'POST';
-                    goto not_admin_user_create;
+            if (0 === strpos($pathinfo, '/profil/admin/user')) {
+                // admin_user
+                if (rtrim($pathinfo, '/') === '/profil/admin/user') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_admin_user;
+                    }
+
+                    if (substr($pathinfo, -1) !== '/') {
+                        return $this->redirect($pathinfo.'/', 'admin_user');
+                    }
+
+                    return array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::indexAction',  '_route' => 'admin_user',);
                 }
+                not_admin_user:
 
-                return array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::createAction',  '_route' => 'admin_user_create',);
-            }
-            not_admin_user_create:
+                // admin_user_create
+                if ($pathinfo === '/profil/admin/user/') {
+                    if ($this->context->getMethod() != 'POST') {
+                        $allow[] = 'POST';
+                        goto not_admin_user_create;
+                    }
 
-            // admin_user_new
-            if ($pathinfo === '/admin/user/new') {
-                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                    $allow = array_merge($allow, array('GET', 'HEAD'));
-                    goto not_admin_user_new;
+                    return array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::createAction',  '_route' => 'admin_user_create',);
                 }
+                not_admin_user_create:
 
-                return array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::newAction',  '_route' => 'admin_user_new',);
-            }
-            not_admin_user_new:
+                // admin_user_new
+                if ($pathinfo === '/profil/admin/user/new') {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_admin_user_new;
+                    }
 
-            // admin_user_show
-            if (preg_match('#^/admin/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                    $allow = array_merge($allow, array('GET', 'HEAD'));
-                    goto not_admin_user_show;
+                    return array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::newAction',  '_route' => 'admin_user_new',);
                 }
+                not_admin_user_new:
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_show')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::showAction',));
-            }
-            not_admin_user_show:
+                // admin_user_show
+                if (preg_match('#^/profil/admin/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_admin_user_show;
+                    }
 
-            // admin_user_edit
-            if (preg_match('#^/admin/user/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
-                if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
-                    $allow = array_merge($allow, array('GET', 'HEAD'));
-                    goto not_admin_user_edit;
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_show')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::showAction',));
                 }
+                not_admin_user_show:
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_edit')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::editAction',));
-            }
-            not_admin_user_edit:
+                // admin_user_edit
+                if (preg_match('#^/profil/admin/user/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                    if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
+                        $allow = array_merge($allow, array('GET', 'HEAD'));
+                        goto not_admin_user_edit;
+                    }
 
-            // admin_user_update
-            if (preg_match('#^/admin/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                if ($this->context->getMethod() != 'PUT') {
-                    $allow[] = 'PUT';
-                    goto not_admin_user_update;
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_edit')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::editAction',));
                 }
+                not_admin_user_edit:
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_update')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::updateAction',));
-            }
-            not_admin_user_update:
+                // admin_user_update
+                if (preg_match('#^/profil/admin/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'PUT') {
+                        $allow[] = 'PUT';
+                        goto not_admin_user_update;
+                    }
 
-            // admin_user_delete
-            if (preg_match('#^/admin/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
-                if ($this->context->getMethod() != 'DELETE') {
-                    $allow[] = 'DELETE';
-                    goto not_admin_user_delete;
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_update')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::updateAction',));
                 }
+                not_admin_user_update:
 
-                return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_delete')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::deleteAction',));
+                // admin_user_delete
+                if (preg_match('#^/profil/admin/user/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                    if ($this->context->getMethod() != 'DELETE') {
+                        $allow[] = 'DELETE';
+                        goto not_admin_user_delete;
+                    }
+
+                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'admin_user_delete')), array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\UserController::deleteAction',));
+                }
+                not_admin_user_delete:
+
             }
-            not_admin_user_delete:
 
         }
 
@@ -229,17 +242,14 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Becool\\Bundle\\MainBundle\\Controller\\SecurityController::loginAction',  '_route' => 'login',);
         }
 
-        if (0 === strpos($pathinfo, '/admin/log')) {
-            // login_check
-            if ($pathinfo === '/admin/login_check') {
-                return array('_route' => 'login_check');
-            }
+        // login_check
+        if ($pathinfo === '/profil/login_check') {
+            return array('_route' => 'login_check');
+        }
 
-            // logout
-            if ($pathinfo === '/admin/logout') {
-                return array('_route' => 'logout');
-            }
-
+        // logout
+        if ($pathinfo === '/logout') {
+            return array('_route' => 'logout');
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

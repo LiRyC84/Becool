@@ -1,14 +1,19 @@
+becool_profil:
+    resource: "@BecoolProfilBundle/Controller/"
+    type:     annotation
+    prefix:   /profil
+
 becool_main:
     resource: "@BecoolMainBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /profil
     
 login:
     pattern:    /login
     defaults:    { _controller: BecoolMainBundle:Security:login }
     
 login_check:
-    pattern:   /admin/login_check
+    pattern:   /profil/login_check
 
 logout:
-    pattern:   /admin/logout
+    pattern:   /logout

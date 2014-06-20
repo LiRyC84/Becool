@@ -7,11 +7,7 @@ security:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
 
-    providers:
-        in_memory:
-            memory:
-              users:
-                admin: { password: af6c4bb9c4c90a8f02b00c8bb7aa4591b79267d8, roles: 'ROLE_ADMIN' }                
+    providers:        
         users:
             entity: { class: Becool\Bundle\MainBundle\Entity\User, property: "username" }
             
@@ -26,20 +22,20 @@ security:
             iterations:       1
 
     firewalls:
-        login_firewall:
-            pattern: ^/login
-            anonymous: true    
-        admin_area:
-            pattern:    ^/admin
+        profil_area:
+            pattern:    ^/profil
             provider: users
             form_login:
                 login_path: /login
-                check_path: /admin/login_check
-                default_target_path: /admin/user
+                check_path: /profil/login_check
+                default_target_path: /profil
             logout:
                 path: logout
                 target: /login
+        login_firewall:
+            pattern: ^/login
+            anonymous: true
 
     access_control:
-        - { path: ^/login/, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
-        - { path: ^/admin, roles: [IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED]}
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/profil, roles: [IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED] }

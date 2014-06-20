@@ -18,7 +18,7 @@ login:
     defaults:    { _controller: BecoolMainBundle:Security:login }
     
 login_check:
-    pattern:   /admin/login_check
+    pattern:   /profil/login_check
 
 logout:
-    pattern:   /admin/logout
+    pattern:   /logout

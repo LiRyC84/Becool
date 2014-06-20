@@ -38,6 +38,7 @@ class UserController extends Controller
             'entities' => $entities,
         );
     }
+    
     /**
      * Creates a new User entity.
      * @Secure(roles="ROLE_ADMIN")
@@ -61,6 +62,10 @@ class UserController extends Controller
         
         // Définition de l'Username par défaut (adresse email)
         $entity->setUsername($entity->getEmail());
+        
+        // Définition du des rôles de l'utilisateur, par défaut ADMIN - à changer
+        $A_roles = array('ROLE_ADMIN');
+        $this->setRoles($A_roles);
         
         // Définition par défaut du niveau du personnage ainsi que des points totaux et temporaires
         $entity->setLevel(1);

@@ -18,7 +18,7 @@ class SecurityController extends Controller
 {
 
   /**
-   * Formulaire d'authentification à l'espace membre.
+   * Formulaire d'authentification à l'espace admin
    *
    * @Route("/", name="login")
    * @Template("BecoolMainBundle:Security:login.html.twig")
