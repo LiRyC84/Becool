@@ -3,5 +3,11 @@
 {% block body %}
   
     <h1>Bonjour {{ user.prenom ~ ' ' ~ user.nom | capitalize }}</h1>
+    
+    {% if is_granted('ROLE_ADMIN') %}
+    <p>
+	<a href="{{ path('admin_user') }}">Aller à la zone admin</a>
+    </p>
+    {% endif %}
 
 {% endblock %}
