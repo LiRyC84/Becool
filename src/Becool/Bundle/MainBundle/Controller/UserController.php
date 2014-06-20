@@ -53,7 +53,11 @@ class UserController extends Controller
         $form->handleRequest($request);
         
         // Encodage du mot de passe en sha1
-        $entity->setPassword(sha1($entity->getPassword()));
+        // $entity->setPassword(sha1($entity->getPassword()));
+        $factory = $this->get('security.encoder_factory');
+	$encoder = $factory->getEncoder($entity);
+	$password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
+	$entity->setPassword($password);
         
         // Définition de l'Username par défaut (adresse email)
         $entity->setUsername($entity->getEmail());

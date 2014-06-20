@@ -7,6 +7,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>User name</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Email</th>
@@ -14,9 +15,9 @@
                 <th>Date de naissance</th>
                 <th>Sexe</th>
                 <th>Ville</th>
-                <th>Niveau</th>
-                <th>Points totaux</th>
-                <th>Points Temporaires</th>
+                <th>Niv.</th>
+                <th>Pts tot</th>
+                <th>Pts Temp</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -24,10 +25,11 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('admin_user_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.username }}</td>
                 <td>{{ entity.nom }}</td>
                 <td>{{ entity.prenom }}</td>
                 <td>{{ entity.email }}</td>
-                <td>{{ entity.password }}</td>
+                <td>****</td>
                 <td>{% if entity.birth %}{{ entity.birth|date('d-m-Y') }}{% endif %}</td>
                 <td>{{ entity.sexe }}</td>
                 <td>{{ entity.ville }}</td>
